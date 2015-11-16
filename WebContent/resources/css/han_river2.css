@@ -1,0 +1,156 @@
+@charset "utf-8";
+/* CSS Document */
+
+@charset "utf-8";
+html, body, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, hr, pre, code, form, fieldset, legetns, input, textarea, button p, blockquote, th, td { margin:0; padding:0; }
+a:link, a:visited, a:active { text-decoration: none; color: #000000; }
+a:hover { text-decoration: underline; color: #000000; }
+
+body{
+	overflow: hidden
+}
+img { border:none; }
+ul, li { list-style-position: outside; list-style-type:none; list-style-image:none; }
+div {  margin: 0px; padding: 0px; color: #000000; font-family: "돋움"; font-size: 12px; }
+
+/*전체 레이아웃*/
+#warp { width: 100%; height: 118px; background-image: url(../img/warp_bg.png); background-repeat: repeat-x; position: relative; }
+#Top_Area { width: 100%; height: 118px; background-image: url(../img/top_bg.png); background-repeat: no-repeat; position: relative; z-index:10002 }
+.top_left { width: 370px; height: 118px; float: left; margin-left: 40px; position: relative; } 
+H1 { width: 340px; height: 56px; background-image: url(../img/ci.png); background-repeat: no-repeat; position: absolute; left: 27px; top: 10px; }
+
+/*컨트롤 버튼*/
+.top_ctrl {  position: absolute; left: 0px; top: 76px; }
+.bt_ctrl { padding-top: 3px; }
+.bt_ctrl li { float: left; }
+
+.b_01 { background-image: url(../img/bt_ctrl_01_off.png); background-repeat: no-repeat; }
+.b_01 a, .b_02 a, .b_03 a, .b_04 a, .b_05 a, .b_06 a, .b_07 a, .b_08 a, .b_09 a { width: 40px; height: 37px; display: block; }
+.b_01 a:hover { background-image: url(../img/bt_ctrl_01_over.png); }
+.b_01 a:visited { background-image: url(../img/bt_ctrl_01_over.png); }
+
+.b_02 { background-image: url(../img/bt_ctrl_02_off.png); background-repeat: no-repeat; }
+.b_02 a:hover { background-image: url(../img/bt_ctrl_02_over.png); }
+
+.b_03 { background-image: url(../img/bt_ctrl_03_off.png); background-repeat: no-repeat; }
+.b_03 a:hover { background-image: url(../img/bt_ctrl_03_over.png); }
+
+.b_04 { background-image: url(../img/bt_ctrl_04_off.png); background-repeat: no-repeat; }
+.b_04 a:hover { background-image: url(../img/bt_ctrl_04_over.png); }
+
+.b_05 { background-image: url(../img/bt_ctrl_05_off.png); background-repeat: no-repeat; }
+.b_05 a:hover { background-image: url(../img/bt_ctrl_05_over.png); }
+
+.b_06 { background-image: url(../img/bt_ctrl_06_off.png); background-repeat: no-repeat; }
+.b_06 a:hover { background-image: url(../img/bt_ctrl_06_over.png); }
+
+.b_07 { background-image: url(../img/bt_ctrl_07_off.png); background-repeat: no-repeat; }
+.b_07 a:hover { background-image: url(../img/bt_ctrl_07_over.png); }
+
+.b_08 { background-image: url(../img/bt_ctrl_08_off.png); background-repeat: no-repeat; }
+.b_08 a:hover { background-image: url(../img/bt_ctrl_08_over.png); }
+
+.b_09 { background-image: url(../img/bt_ctrl_09_off.png); background-repeat: no-repeat; }
+.b_09 a:hover { background-image: url(../img/bt_ctrl_09_over.png); }
+
+
+/*오른쪽 상단*/
+.top_right { width: 630px; height: 118px; float: right; margin-right: 0px; position: relative; }
+.map_kind { position: absolute; top: 20px; left: 0px; }
+.map_kind li { width: 95px; height: 39px; float: left; }
+
+.map_01 { background-image: url(../img/bt_1_off.png); background-repeat: no-repeat; }
+.map_01 a:hover { background-image: url(../img/bt_1_over.png); }
+.map_01 a, .map_02 a, .map_03 a { width: 95px; height: 39px; display: block; }
+
+.map_02 { background-image: url(../img/bt_2_off.png); background-repeat: no-repeat; }
+.map_02 a:hover { background-image: url(../img/bt_2_over.png); }
+
+.map_03 { background-image: url(../img/bt_3_off.png); background-repeat: no-repeat; }
+.map_03 a:hover { background-image: url(../img/bt_3_over.png); }
+
+.select_date { height: 75px; background-image: url(../img/select_division.png); background-repeat: no-repeat; position: absolute; top: 0px; left: 304px; }
+#select_01 { width: 174px; height: 30px; padding-left: 9px; }
+.select_01 { font-size: 12px; font-weight: bold; letter-spacing: -1px; }
+
+#Link { width:170px; }
+.selectlayer { display:block; position:relative; top:9px; height:18px; background-image: url(../img/select_menu.gif); cursor:pointer; }
+.selectlayer a.default { display:block; height:18px; background:url('../img/ico_selectdown.gif') right 7px no-repeat; color:#000000; line-height:18px; text-decoration:none; font-weight: bold; letter-spacing: -1px; }
+.selectlayer a.default:hover { text-decoration:none; }
+.selectlayer ul { position:absolute; left:-1px; top: 21px; display:none; width:100%; background-color:#ffffff; border:1px solid #c2c2c2; z-index : 10001; height : 100px; overflow-y : auto }
+.selectlayer ul li { display:block; width:100%; letter-spacing: -1px; margin-bottom: 5px; color: #606060; }
+.selectlayer ul li a { display:block; height:18px; padding:0 0 0 5px; color: #606060; line-height:20px; text-decoration:none; }
+.selectlayer ul li a:hover { background-color:#9b9c9c; color:#141517; text-decoration:none; }
+.selectlayer ul li a.selected { background-color:#9b9c9c; color:#141517; }
+
+.date_txt { position:relative; width: 170px; color: #083b57; margin-top: 16px; top:13px; }
+
+.roll_area_info { width: 130px; height: 55px; position: absolute; top: 10px; left: 500px; }
+.roll_area_info img { width: 33px; height: 39px; float: left; padding-top:5px }
+.roll_area_info .data_form { width: 90px; height: 39px; font-size: 15px; float: right; padding-top: 2px; }
+.roll_area_info .data_form li { text-align: center; letter-spacing: -1px; }
+
+
+/*화면*/
+#GIS_Area { width: 100%; background-repeat: x-repeat; }
+#GIS_Area1 { width: 100%; background-repeat: x-repeat; }
+/*왼쪽메뉴*/
+#wrapAccordion { width: 328px; height: 420px; float: left; background-image: url(../img/accordion_bg.png); bacbackground-repeat: no-repeat; padding: 30 35 0 41; position: absolute; z-index: 10000; }
+#wrapAccordion div div { overflow-x: hidden }
+aclick {  width: 10px; height: 10px; padding: 30 35 0 41; position: absolute; }
+/**H3 { width: 317px; height: 19px; color: #00fbff; font-weight: bold; letter-spacing: -1px; font-size: 12px; background-image:url(../img/h3_title.png); background-repeat: repeat-x; padding: 5 0 0 11; position: relative; }
+H3 span { position: absolute; left: 305px; top: 5px; cursor: pointer; display: block; }*/
+.place_box { width: 318px; height: 100%; font-size: 12px; letter-spacing: -1px; padding: 10 0 0 10; margin-bottom: 17px; overflow : hidden } 
+.place_box li { color: #FFFFFF; line-height: 21px; }
+.place_box input { margin-right: 5px; }
+.low_box { width: 294px; height: auto; font-size: 11px; padding-left: 20px; margin-bottom: 45px; }
+.low_box li { float: left; margin-right: 22px; }
+
+.item_box { width: 318px; height: 250px; font-size: 12px; padding: 10 0 0 10; margin-bottom: 17px; overflow-x: hidden; overflow-y:hidden;
+ scrollbar-arrow-color:white; scrollbar-face-color: white; scrollbar-highlight-color: #3d3d3d; scrollbar-3dlight-color: #3d3d3d; scrollbar-shadow-color: #3d3d3d; scrollbar-darkshadow-color: #3d3d3d; scrollbar-track-color: #3d3d3d; 
+ } 
+.item_box li { color: #FFFFFF; line-height: 21px; }
+.item_box input { margin-right: 5px; }
+
+.wms_box { width: 318px; height: 100%; font-size: 12px; letter-spacing: -1px; padding: 10 0 0 10; margin-bottom: 17px; overflow : hidden } 
+.wms_box li { color: #FFFFFF; line-height: 21px; }
+.wms_box input { margin-right: 5px; }
+
+.app { width: 52px; height: 19px; background-image: url(../img/icon_app.png); cursor: pointer; position: absolute; display: block; top: 427px; left: 250px; z-index: 10000; }
+/*.left_close { width: 80px; height: 15px; background-image: url(../img/left_menu_close.png); background-repeat: no-repeat; cursor: pointer; display: block; position: absolute; top: 537px; left: 118px; z-index: 10000; }*/
+.left_close { width: 80px; height: 15px; background-image: url(../img/left_menu_close.png); background-repeat: no-repeat; cursor: pointer; display: block; position: relative; top: 0px; left: 118px; z-index: 10000; }
+/*하단*/
+#bottom { width: 94%; height: 49px; background-image: url(../img/bottom_bg.gif); background-repeat: repeat-x; position: relative; padding: 0 3% 0 3%; }
+.item { width: 6%; font-size: 16px; font-weight: bold; color: #002f59;  padding-top: 10px; float:left; }
+.area_name { width: 3%; font-size: 16px; color: #ff5a36; background-position: left 18px; padding-top: 16px; float:left; }
+
+#Data_Rolling { width: 78%; height: 49px; font-size: 16px; color: #FFFFFF; background-image: url(../img/data_rolling_bg.gif); background-repeat: repeat-x; line-height: 50px; word-spacing: 26px; float: left;  }
+#Data_Rolling div  { color: #FFFFFF; width : auto }
+.copyright { width: 8%; height: 49px; float: right; padding-left: 2%; }
+
+.ui-accordion-content-active
+{
+    background-color: transparent;
+    overflow:visible !important;
+}
+
+/*범례*/
+#remark_form{ width:246px; height: 0px; float: right; position: absolute; z-index: 10000; top: 117px; right: 1px; }
+.remark { width: 246px; height: auto; float: right; background-image: url(../img/accordion_bg.png); bacbackground-repeat: no-repeat; position: relative; }
+.remark li { height: 38px; background-image: url(../img/remark_divi_line.png); background-repeat: repeat-x; line-height: 41px; }
+
+.right_close { width: 66px; height: 14px; background-image: url(../img/left_menu_close.png); background-repeat: no-repeat; cursor: pointer; display: block; clear: both; margin-left: 95px; }
+.right_close2 { width: 66px; height: 14px; background-image: url(../img/left_menu_close.png); background-repeat: no-repeat; cursor: pointer; display: block; clear: both; margin-left: 95px; }
+
+.remark_01, .remark_02, .remark_03, .remark_04, .remark_05, .remark_06, .remark_07 { font-size: 11px; letter-spacing: -1px; color: #FFFFFF;  }
+.remark_01 li, .remark_02 li, .remark_03 li, .remark_04 li, .remark_05 li, .remark_06 li, .remark_07 li { width: 82px; text-align: center; float: left; text-shadow: 1px 1px 1px #111; background-image: none;}
+
+/*이윤수 추가*/
+/*인덱스 맵*/
+#overviewMap { width:250px; height:180px; position : fixed; right : 1px; bottom : 50px; z-index : 10000 }
+
+#ttt1 { width : 260px; height : 20px; text-align: center; }
+#ttt2 { width : 410px; height : 20px; text-align: center; }
+#ttt3 { width : 280px; height : 20px; text-align: center; }
+#ttt4 { width : 430px; height : 20px; text-align: center; }
+#ttt5 { width : 250px; height : 20px; text-align: center; }

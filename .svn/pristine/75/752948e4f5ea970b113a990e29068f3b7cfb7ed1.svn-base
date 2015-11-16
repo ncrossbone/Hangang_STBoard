@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>hangang</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>asd</display-name>
+    <servlet-name>asd</servlet-name>
+    <servlet-class>Data.asd</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>asd</servlet-name>
+    <url-pattern>/asd</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>data</description>
+    <display-name>JfreeChartTest</display-name>
+    <servlet-name>JfreeChartTest</servlet-name>
+    <servlet-class>Data.JfreeChartTest</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>JfreeChartTest</servlet-name>
+    <url-pattern>/JfreeChartTest</url-pattern>
+  </servlet-mapping>
+</web-app>
