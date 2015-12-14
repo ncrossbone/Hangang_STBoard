@@ -598,7 +598,7 @@ TwoDMap.prototype.initMap = function() {
 		map = this.vmap;
 		main.getTwoDMap().map = map;
 		// khLee
-		console.info(map.vworldBaseMap);
+		//console.info(map.vworldBaseMap);
 
 		// 기본맵 설정
 		map.setBaseLayer(map.vworldBaseMap);
@@ -695,8 +695,8 @@ var _jsonFeatures = null; // 피처셋
 
 function GetJsonFeatures(measureName, spotGubun){
 	
-	console.info("spotGubun : " + spotGubun);
-	console.info("measureName : " + measureName);
+	//console.info("spotGubun : " + spotGubun);
+	//console.info("measureName : " + measureName);
 	
 	if(_measureName == measureName && _spotGubun == spotGubun){
 		return _jsonFeatures;
@@ -761,7 +761,7 @@ TwoDMap.prototype.drawChart = function drawChart(param) {
 						var result = data.d;
 
 						// khLee
-						console.info(result);
+						//console.info(result);
 						
 						var json = new OpenLayers.Format.GeoJSON();
 						var jsonFeatures = json.read(result[0]);
@@ -815,7 +815,7 @@ TwoDMap.prototype.drawMarker = function drawMarker(param) {
 						var result = data.d;
 
 						// khLee
-						console.info(result);
+						//console.info(result);
 						
 						var json = new OpenLayers.Format.GeoJSON();
 						var jsonFeatures = json.read(result[0]);

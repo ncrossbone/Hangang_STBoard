@@ -147,8 +147,8 @@ Map.prototype.setSearchStatus = function(values){
 Map.prototype.checkFeature = function checkFeature(isFeatureUpdate, param){
 	if(isFeatureUpdate){
 		// khLee
-		console.info(isFeatureUpdate);
-		console.info(param);
+		//console.info(isFeatureUpdate);
+		//console.info(param);
 		
 		this.drawChart(param);
 		this.drawMarker(param);

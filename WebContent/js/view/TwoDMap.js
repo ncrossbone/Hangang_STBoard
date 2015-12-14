@@ -352,9 +352,11 @@ function TwoDMap() {
 					layers : 'basic'
 				});
 
+		var common = new Common();
+		
 		var middelWMS = new OpenLayers.Layer.WMS("junghangang",
-				"http://cetech.iptime.org:20008/geoserver/woo/wms", {
-					LAYERS : 'woo:junghangang',
+				common.mapServerUrl + "/geoserver/woo/wms", {
+					LAYERS : 'woo:jonghangang',
 					STYLES : '',
 					format : 'image/png',
 					transparent : true
@@ -607,8 +609,10 @@ TwoDMap.prototype.initMap = function() {
 
 	map.setCenter(new OpenLayers.LonLat(14182717.041824, 4502632.857001), 10);
 
+	var common = new Common();
+	
 	var hacheonLayer = new OpenLayers.Layer.WMS("hacheon",
-			"http://cetech.iptime.org:20008/geoserver/woo/wms", {
+			common.mapServerUrl + "/geoserver/woo/wms", {
 				LAYERS : 'woo:hacheon',
 				STYLES : '',
 				format : 'image/png',
