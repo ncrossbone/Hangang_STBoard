@@ -3,9 +3,9 @@
  */
 
 function Common(){
-	//this.websiteUrl = "http://water.nier.go.kr";
+	this.websiteUrl = "http://water.nier.go.kr";
 	//this.websiteUrl = "localhost:8089";
-	this.websiteUrl = "localhost:8081";
+	//this.websiteUrl = "localhost:8081";
 	//this.websiteUrl = "localhost:8080";
 	//Dal test
 	//this.mapServerUrl = "http://118.37.180.151:20008";

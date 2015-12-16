@@ -234,7 +234,6 @@ twoDMap.prototype.initMap = function() {
 	this.map.addLayer(hybrid);
 
 	this.map.addControl(new OpenLayers.Control.Navigation());
-
 	this.map.setCenter(new OpenLayers.LonLat(127.7, 35.9).transform(
 			new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection(
 					"EPSG:900913")), 14);

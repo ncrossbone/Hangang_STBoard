@@ -597,7 +597,6 @@ TwoDMap.prototype.initMap = function() {
 	var baseLayer = this.createVBASELayer();
 	var satellite = this.createSatelliteLayer();
 	var hybrid = this.createHybridLayer();
-	alert("");
 	map.addLayer(baseLayer);
 	baseLayer.isBaseLayer = true;
 	map.addLayer(satellite);

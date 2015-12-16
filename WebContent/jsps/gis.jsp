@@ -296,12 +296,12 @@
 					</ul>
 				</div>
 
-				<H3>Chart 투명도 조절</H3>
+<!-- 				<H3>Chart 투명도 조절</H3>
 				<div>
 					<div width="100%" id="opacityTextfield" align="center"
 						style="color: #ffffff">투명도 : 100%</div>
 					<div id="opacitySlider" style="overflow-x: visible"></div>
-				</div>
+				</div> -->
 			</div>
 			<div class="left_close">
 				<a href="#"></a>

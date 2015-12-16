@@ -373,7 +373,6 @@ function TwoDMap() {
 		twoDOverviewMap.addLayer(overviewLayer);
 		twoDOverviewMap.addLayer(middelWMS);
 		twoDOverviewMap.setCenter(new OpenLayers.LonLat(0, 0), 1);
-
 		var vector = new OpenLayers.Layer.Vector("overview", {
 			strokeColor : "#FF0000",
 			strokeWidth : 2,
@@ -392,7 +391,7 @@ function TwoDMap() {
 			var lonlat = new OpenLayers.LonLat(center.x, center.y).transform(
 					new OpenLayers.Projection("EPSG:4326"),
 					new OpenLayers.Projection("EPSG:900913"));
-			map.setCenter(lonlat, map.getZoom());
+			//map.setCenter(lonlat, map.getZoom());
 		};
 
 		dragFeatureControl.activate();
@@ -408,7 +407,13 @@ function TwoDMap() {
 		} else {
 			zoom = zoom - 6;
 		}
-
+		console.info(lonlat);
+		//lonlat 반복
+		//overview지도와 중복 ph
+		/*lonlat.lon=14164696.84856;
+		lonlat.lat=4515350.941514;
+		*/
+		//console.info(map);*/
 		twoDOverviewMap.setCenter(lonlat.transform(new OpenLayers.Projection(
 				"EPSG:900913"), new OpenLayers.Projection("EPSG:4326")), zoom);
 
@@ -564,7 +569,7 @@ function TwoDMap() {
 					var bound = vector.getDataExtent();
 
 					if (bound != undefined) {
-						map.zoomToExtent(bound);
+						//map.zoomToExtent(bound);
 					}
 
 					vector.destroy();
@@ -609,9 +614,66 @@ TwoDMap.prototype.initMap = function() {
 
 		// 화면중심점과 레벨로 이동
 		// Dal test
-		map.setCenter(new OpenLayers.LonLat(14182717.041824, 4502632.857001),
-				10);
+		map.setCenter(new OpenLayers.LonLat(14164696.84856, 4515350.941514),
+				15);
 
+		var daehangangLayer = new OpenLayers.Layer.WMS("daehangang",
+				new Common().mapServerUrl + "/geoserver/woo/wms", {
+					LAYERS : 'woo:daehangang',
+					STYLES : '',
+					format : 'image/png',
+					transparent : true
+				}, {
+					singleTile : true,
+					ratio : 1,
+					isBaseLayer : false,
+					yx : {
+						'EPSG:900913' : false
+					},
+					transitionEffect : 'resize',
+					opacity : 1.0
+				});
+
+		map.addLayer(daehangangLayer);
+		
+		var junghangangLayer = new OpenLayers.Layer.WMS("junghangang",
+				new Common().mapServerUrl + "/geoserver/woo/wms", {
+					LAYERS : 'woo:junghangang',
+					STYLES : '',
+					format : 'image/png',
+					transparent : true
+				}, {
+					singleTile : true,
+					ratio : 1,
+					isBaseLayer : false,
+					yx : {
+						'EPSG:900913' : false
+					},
+					transitionEffect : 'resize',
+					opacity : 1.0
+				});
+
+		map.addLayer(junghangangLayer);
+		
+		var sohangangLayer = new OpenLayers.Layer.WMS("sohangang",
+				new Common().mapServerUrl + "/geoserver/woo/wms", {
+					LAYERS : 'woo:sohangang',
+					STYLES : '',
+					format : 'image/png',
+					transparent : true
+				}, {
+					singleTile : true,
+					ratio : 1,
+					isBaseLayer : false,
+					yx : {
+						'EPSG:900913' : false
+					},
+					transitionEffect : 'resize',
+					opacity : 1.0
+				});
+
+		map.addLayer(sohangangLayer);
+		
 		var hacheonLayer = new OpenLayers.Layer.WMS("hacheon",
 				new Common().mapServerUrl + "/geoserver/woo/wms", {
 					LAYERS : 'woo:hacheon',
@@ -630,6 +692,36 @@ TwoDMap.prototype.initMap = function() {
 				});
 
 		map.addLayer(hacheonLayer);
+		
+		
+		
+		daehangangLayer.setVisibility(false);
+		$("#wmsChange1").bind("click", function() {
+			if (daehangangLayer.getVisibility() == false) {
+				daehangangLayer.setVisibility(true);
+			} else {
+				daehangangLayer.setVisibility(false);
+			}
+		});
+		
+		junghangangLayer.setVisibility(false);
+		$("#wmsChange2").bind("click", function() {
+			if (junghangangLayer.getVisibility() == false) {
+				junghangangLayer.setVisibility(true);
+			} else {
+				junghangangLayer.setVisibility(false);
+			}
+		});
+		
+		sohangangLayer.setVisibility(false);
+		$("#wmsChange3").bind("click", function() {
+			if (sohangangLayer.getVisibility() == false) {
+				sohangangLayer.setVisibility(true);
+			} else {
+				sohangangLayer.setVisibility(false);
+			}
+		});
+		
 		hacheonLayer.setVisibility(false);
 		$("#wmsChange4").bind("click", function() {
 			if (hacheonLayer.getVisibility() == false) {
@@ -638,6 +730,9 @@ TwoDMap.prototype.initMap = function() {
 				hacheonLayer.setVisibility(false);
 			}
 		});
+		
+		
+		
 
 		map.events.register('zoomend', map, function() {
 			var twoMap = main.getTwoDMap();

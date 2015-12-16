@@ -95,7 +95,7 @@ H1 { width: 340px; height: 56px; background-image: url(../img/ci.png); backgroun
 #GIS_Area { width: 100%; background-repeat: x-repeat; }
 #GIS_Area1 { width: 100%; background-repeat: x-repeat; }
 /*왼쪽메뉴*/
-#wrapAccordion { width: 328px; height: 420px; float: left; background-image: url(../img/accordion_bg.png); bacbackground-repeat: no-repeat; padding: 30 35 0 41; position: absolute; z-index: 10000; }
+#wrapAccordion { width: 328px; height: 394px; float: left; background-image: url(../img/accordion_bg.png); bacbackground-repeat: no-repeat; padding: 30 35 0 41; position: absolute; z-index: 10000; }
 #wrapAccordion div div { overflow-x: hidden }
 aclick {  width: 10px; height: 10px; padding: 30 35 0 41; position: absolute; }
 /**H3 { width: 317px; height: 19px; color: #00fbff; font-weight: bold; letter-spacing: -1px; font-size: 12px; background-image:url(../img/h3_title.png); background-repeat: repeat-x; padding: 5 0 0 11; position: relative; }
@@ -116,7 +116,7 @@ H3 span { position: absolute; left: 305px; top: 5px; cursor: pointer; display: b
 .wms_box li { color: #FFFFFF; line-height: 21px; }
 .wms_box input { margin-right: 5px; }
 
-.app { width: 52px; height: 19px; background-image: url(../img/icon_app.png); cursor: pointer; position: absolute; display: block; top: 427px; left: 250px; z-index: 10000; }
+.app { width: 52px; height: 19px; background-image: url(../img/icon_app.png); cursor: pointer; position: absolute; display: block; top: 395px; left: 250px; z-index: 10000; }
 /*.left_close { width: 80px; height: 15px; background-image: url(../img/left_menu_close.png); background-repeat: no-repeat; cursor: pointer; display: block; position: absolute; top: 537px; left: 118px; z-index: 10000; }*/
 .left_close { width: 80px; height: 15px; background-image: url(../img/left_menu_close.png); background-repeat: no-repeat; cursor: pointer; display: block; position: relative; top: 0px; left: 118px; z-index: 10000; }
 /*하단*/
