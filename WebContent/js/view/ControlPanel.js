@@ -43,7 +43,7 @@ ControlPanel.CHL = "HM0026"; // // 녹조류 (자료 없음)
 ControlPanel.ELE = "HM0027"; // // 전기전도도 (자료 없음)
 
 /* 댐.보 추가 */
-ControlPanel.RS = "HM0028"; // 저수위
+ControlPanel.RS = "HM0028"; // 수위
 ControlPanel.RA = "HM0031"; // 저수량
 ControlPanel.GO = "HM0032"; // 공용량
 ControlPanel.YI = "HM0034"; // 유입량
@@ -490,7 +490,7 @@ function ControlPanel(){
 			}else if(viewValue[a]==ControlPanel.WAI){
 				
 			}else if(viewValue[a]==ControlPanel.RS){
-				$("#item_box").append("<li><input name='RS' type='checkbox' value='javascript : ControlPanel.RS'>저수위</li>");
+				$("#item_box").append("<li><input name='RS' type='checkbox' value='javascript : ControlPanel.RS'>수위</li>");
 			}else if(viewValue[a]==ControlPanel.RA){
 				$("#item_box").append("<li><input name='RA' type='checkbox' value='javascript : ControlPanel.RA'>유입량</li>");
 			}else if(viewValue[a]==ControlPanel.GO){
@@ -546,7 +546,7 @@ function ControlPanel(){
 //			}else if(viewValue[a]==ControlPanel.WAI){
 //				
 //			}else if(viewValue[a]==ControlPanel.RS){
-//				$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.RS'>저수위</li>");
+//				$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.RS'>수위</li>");
 //			}else if(viewValue[a]==ControlPanel.RA){
 //				$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.RA'>유입량</li>");
 //			}else if(viewValue[a]==ControlPanel.GO){

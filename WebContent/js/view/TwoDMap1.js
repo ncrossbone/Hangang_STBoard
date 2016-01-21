@@ -407,7 +407,7 @@ function TwoDMap() {
 		} else {
 			zoom = zoom - 6;
 		}
-		console.info(lonlat);
+		//console.info(lonlat);
 		//lonlat 반복
 		//overview지도와 중복 ph
 		/*lonlat.lon=14164696.84856;
