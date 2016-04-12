@@ -803,7 +803,7 @@ function GetJsonFeatures(measureName, spotGubun){
 				dataType : "json",
 				async: false // 동기 호출
 	}).done(function(data) {
-		
+		//console.info(data);
 		var result = data.d;
 		
 		var json = new OpenLayers.Format.GeoJSON();
@@ -833,17 +833,6 @@ TwoDMap.prototype.drawChart = function drawChart(param) {
 	var spotGubun = param.spotGubun;
 	var date = new Date();
 	
-	/* khLee 작업 실패
-	var jsonFeatures = GetJsonFeatures(measureName, spotGubun);
-	var jsonLayer = map.getLayersByName(TwoDMap.CHART_VECTOR_LAYER_NAME);
-	jsonLayer[0].removeAllFeatures();
-	jsonLayer[0].addFeatures(jsonFeatures);
-
-	var twoDMapClass = main.getTwoDMap();
-	twoDMapClass.setOpacity.apply(twoDMapClass, [TwoDMap.CHART_VECTOR_LAYER_NAME, 1 ]);
-	twoDMapClass.loadEndCheck.apply(twoDMapClass, []);
-	*/
-	
 	$
 			.ajax(
 					{
@@ -854,81 +843,31 @@ TwoDMap.prototype.drawChart = function drawChart(param) {
 			.done(
 					function(data) {
 						var result = data.d;
-
-						// khLee
-						//console.info(result);
-						
-						var json = new OpenLayers.Format.GeoJSON();
-						var jsonFeatures = json.read(result[0]);
-						_jsonFeatures = jsonFeatures;
-						var jsonLayer = map
-								.getLayersByName(TwoDMap.CHART_VECTOR_LAYER_NAME);
-						jsonLayer[0].removeAllFeatures();
-						jsonLayer[0].addFeatures(jsonFeatures);
-
-						var twoDMapClass = main.getTwoDMap();
-						twoDMapClass.setOpacity.apply(twoDMapClass, [
-								TwoDMap.CHART_VECTOR_LAYER_NAME, 1 ]);
-						
-						// khLee
-						twoDMapClass.loadEndCheck.apply(twoDMapClass, []);
-						//$("#dialog-modal").dialog("destroy");
+ 						
+						drawSymbols(result, TwoDMap.CHART_VECTOR_LAYER_NAME); // 차트 보이기
+						drawSymbols(result, TwoDMap.MARKER_VECTOR_LAYER_NAME); // 마커 보이기
+			
 					});
 };
 
-/**
- * @Date : 2014. 3. 25.
- * @MethodType : public.
- * @작성자 : leeyunsoo
- * @변경이력 :
- * @메서드 설명 : 마커를 그리는 메서드
- */
-TwoDMap.prototype.drawMarker = function drawMarker(param) {
-	var measureName = param.measureName;
-	var spotGubun = param.spotGubun;
+drawSymbols = function (result, layerName){
 	
-	/* khLee 작업 실패
-	var jsonFeatures = GetJsonFeatures(measureName, spotGubun);
-	var jsonLayer = map.getLayersByName(TwoDMap.MARKER_VECTOR_LAYER_NAME);
+	var json = new OpenLayers.Format.GeoJSON();
+	var jsonFeatures = json.read(result[0]);
+	_jsonFeatures = jsonFeatures;
+	var jsonLayer = map
+			.getLayersByName(layerName);
 	jsonLayer[0].removeAllFeatures();
 	jsonLayer[0].addFeatures(jsonFeatures);
 
 	var twoDMapClass = main.getTwoDMap();
-	twoDMapClass.setOpacity.apply(twoDMapClass, [TwoDMap.MARKER_VECTOR_LAYER_NAME, 1 ]);
+	twoDMapClass.setOpacity.apply(twoDMapClass, [
+			layerName, 1 ]);
+	
+	// khLee
 	twoDMapClass.loadEndCheck.apply(twoDMapClass, []);
-	*/
-
-	$
-			.ajax(
-					{
-						url : "../jsps/queryData/getQueryData.jsp?queryNum=40&requestType=1&measure="
-								+ measureName + "&spotGubun=" + spotGubun,
-						dataType : "json"
-					})
-			.done(
-					function(data) {
-						var result = data.d;
-
-						// khLee
-						//console.info(result);
-						
-						var json = new OpenLayers.Format.GeoJSON();
-						var jsonFeatures = json.read(result[0]);
-						_jsonFeatures = jsonFeatures;
-						var jsonLayer = map
-								.getLayersByName(TwoDMap.MARKER_VECTOR_LAYER_NAME);
-						jsonLayer[0].removeAllFeatures();
-						jsonLayer[0].addFeatures(jsonFeatures);
-
-						var twoDMapClass = main.getTwoDMap();
-						twoDMapClass.setOpacity.apply(twoDMapClass, [
-								TwoDMap.MARKER_VECTOR_LAYER_NAME, 1 ]);
-						
-						// khLee
-						twoDMapClass.loadEndCheck.apply(twoDMapClass, []);
-						//$("#dialog-modal").dialog("destroy");
-					});
-};
+	//$("#dialog-modal").dialog("destroy");
+}
 
 /**
  * @Date : 2014. 3. 25.

@@ -259,8 +259,10 @@
 							value="javascript: ControlPanel.AUTOMATIC_MEASUREMENT_NETWORK">자동측정망</li>
 						<li><input name="TIDE_MEASUREMENT_NETWORK" type="checkbox"
 							value="javascript: ControlPanel.TIDE_MEASUREMENT_NETWORK">조류측정망</li>
+						<!-- 2016.04.05 HyeokPark	
 						<li><input name="IP_USN" type="checkbox"
 							value="javascript: ControlPanel.IP_USN">IP-USN</li>
+						 -->
 						<li><input name="DAM_BO" type="checkbox"
 							value="javascript: ControlPanel.DAM_BO">댐·보</li>
 					</ul>

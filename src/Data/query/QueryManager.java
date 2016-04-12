@@ -601,15 +601,15 @@ public class QueryManager {
 				queryString.append("           WHERE \"MMP_INFO\".\"MMP_CD\" = public.soo.\"측정소코드\" ");
 				queryString.append("           ) AS \"SOO\" ");
 				queryString.append("         FROM \"MMP_INFO\" ");
-				queryString.append("         WHERE 1         =1 ");
-				queryString.append("         AND \"PT_DIV_CD\" = '" + spotGubun + "' ");
+				//queryString.append("         WHERE 1         =1 ");
+				//queryString.append("         AND \"PT_DIV_CD\" = '" + spotGubun + "' ");
+				queryString.append("         WHERE \"PT_DIV_CD\" = '" + spotGubun + "' ");
 				queryString.append("         ) AS D ");
 				queryString.append("       ) AS C ");
 				queryString.append("     ) AS A ");
 				queryString.append("   ) AS T ");
 				
 				System.out.println("40 Query :"+queryString.toString());
-				
 				
 				break;
 				

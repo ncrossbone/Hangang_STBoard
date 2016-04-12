@@ -151,7 +151,7 @@ Map.prototype.checkFeature = function checkFeature(isFeatureUpdate, param){
 		//console.info(param);
 		
 		this.drawChart(param);
-		this.drawMarker(param);
+		//this.drawMarker(param);
 		this.changeChartAndMarker(this.checkZoom());
 	}else{
 		this.changeChartAndMarker(this.checkZoom());
