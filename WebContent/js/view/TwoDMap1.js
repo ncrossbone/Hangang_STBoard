@@ -697,6 +697,7 @@ TwoDMap.prototype.initMap = function() {
 		
 		daehangangLayer.setVisibility(false);
 		$("#wmsChange1").bind("click", function() {
+
 			if (daehangangLayer.getVisibility() == false) {
 				daehangangLayer.setVisibility(true);
 			} else {

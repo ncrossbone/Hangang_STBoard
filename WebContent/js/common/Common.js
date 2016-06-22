@@ -3,16 +3,16 @@
  */
 
 function Common(){
-	//this.websiteUrl = "http://water.nier.go.kr";
-	this.websiteUrl = "localhost:8088";
+	this.websiteUrl = "http://water.nier.go.kr";
+	//this.websiteUrl = "localhost:8088";
 	//this.websiteUrl = "localhost:8089";
 	//this.websiteUrl = "localhost:8081";
 	//this.websiteUrl = "localhost:8080";
 	//Dal test
 	//this.mapServerUrl = "http://118.37.180.151:20008";
-	//this.mapServerUrl = "http://water.nier.go.kr";
+	this.mapServerUrl = "http://water.nier.go.kr";
 	//this.mapServerUrl = "http://112.217.167.123:39516";
-	this.mapServerUrl = "http://112.218.1.243:38080";
+	//this.mapServerUrl = "http://112.217.167.123:38080";
 	
 	
 	this.getMarkerImage = function(value){

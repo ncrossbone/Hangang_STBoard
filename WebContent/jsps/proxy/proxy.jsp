@@ -1,6 +1,6 @@
 <%@page session="false"%>
-<%@page import="java.net.*,java.io.*" %>
-<%@page trimDirectiveWhitespaces="true"%> 
+<%@page import="java.net.*,java.io.*"%>
+<%@page trimDirectiveWhitespaces="true"%>
 <%
 
 /**

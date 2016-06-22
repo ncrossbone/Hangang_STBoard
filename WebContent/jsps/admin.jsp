@@ -1,7 +1,8 @@
 <%@page import="Data.*"%>
-<%@ page import="java.sql.*" %>
+<%@ page import="java.sql.*"%>
 <%@page import="java.io.PrintWriter"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,7 +12,7 @@
 </script>
 </head>
 <body>
-<%
+	<%
 try{
 	 String url = "jdbc:postgresql://cetech.iptime.org:2022/woo";
 	 String usr = "postgres";
@@ -38,11 +39,13 @@ try{
 	}
 
 %>
-<table>
-	<tr>
-		<td><input type="text" id="t1" style="width:550px; height:200px;"></td>
-		<td><input type="button" id="b1" value="click" onclick="javascript:goInsert();"></td>
-	</tr>
-</table>
+	<table>
+		<tr>
+			<td><input type="text" id="t1"
+				style="width: 550px; height: 200px;"></td>
+			<td><input type="button" id="b1" value="click"
+				onclick="javascript:goInsert();"></td>
+		</tr>
+	</table>
 </body>
 </html>

@@ -9,7 +9,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class Accident implements IQueryWork {
+public class Accident implements IQueryWork { 
 
 	/* (non-Javadoc)
 	 * @see Data.IQueryWork#getData(java.lang.String)

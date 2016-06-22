@@ -6,7 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>한강 수계 통합 유역관리 시스템</title>
-<link href="../resources/css/han_river.css" rel="stylesheet" type="text/css">
+<link href="../resources/css/han_river.css" rel="stylesheet"
+	type="text/css">
 
 <SCRIPT language="JavaScript" type="text/javascript"
 	src="http://map.vworld.kr/js/vworldMapInit.js.do?apiKey=777E3A53-9DDA-3BF1-929F-CE5825912A05"></SCRIPT>
@@ -134,10 +135,13 @@
 				</div>
 				<table class="location_player" valign="top">
 					<tr>
-					<td>
-					<a href="javascript:playOrStop(1)"><img id="play" src="../resources/img/timeLayer_btn_play.png" style="position:relative; top:0; width:24px; height:24px; display: inline;"></img></a> 
-					<a href="javascript:playOrStop(2)"><img id="stop" src="../resources/img/timeLayer_btn_pause.png" style="position:relative; top:0; width:24px; height:24px; display: none;"></img></a>
-					</td>
+						<td><a href="javascript:playOrStop(1)"><img id="play"
+								src="../resources/img/timeLayer_btn_play.png"
+								style="position: relative; top: 0; width: 24px; height: 24px; display: inline;"></img></a>
+							<a href="javascript:playOrStop(2)"><img id="stop"
+								src="../resources/img/timeLayer_btn_pause.png"
+								style="position: relative; top: 0; width: 24px; height: 24px; display: none;"></img></a>
+						</td>
 					</tr>
 				</table>
 			</div>

@@ -13,17 +13,17 @@
 	type="text/css">
 
 
-
+ 
 <script type="text/javascript" src="../js/jquery-1.11.0.js"></script>
 <script src="../js/jquery-ui.js" type="text/javascript"></script>
 <script src="http://www.openlayers.org/api/2.13/OpenLayers.js"
 	type="text/javascript"></script>
 <!-- http://water.nier.go.kr/hangang/jsps/gis.jsp 인증키 (실서버) -->
-<!-- <SCRIPT language="JavaScript" type="text/javascript"
-	src="http://map.vworld.kr/js/vworldMapInit.js.do?apiKey=50C07490-F9B8-3C00-AB72-D85946AF22B8"></SCRIPT> -->
-<!--  http://localhost:8088 인증키 -->
 <SCRIPT language="JavaScript" type="text/javascript"
-	src="http://map.vworld.kr/js/vworldMapInit.js.do?apiKey=327DE1AD-04CC-34BA-A460-9F63CBD158C0"></SCRIPT>
+	src="http://map.vworld.kr/js/vworldMapInit.js.do?apiKey=50C07490-F9B8-3C00-AB72-D85946AF22B8"></SCRIPT>
+<!--  http://localhost:8088 인증키 -->
+<!-- <SCRIPT language="JavaScript" type="text/javascript"
+	src="http://map.vworld.kr/js/vworldMapInit.js.do?apiKey=327DE1AD-04CC-34BA-A460-9F63CBD158C0"></SCRIPT>-->
 
 <script type="text/javascript" src="../js/common/Common.js"></script>
 <script type="text/javascript" src="../js/Main1.js"></script>
@@ -302,7 +302,7 @@
 					</ul>
 				</div>
 
-<!-- 				<H3>Chart 투명도 조절</H3>
+				<!-- 				<H3>Chart 투명도 조절</H3>
 				<div>
 					<div width="100%" id="opacityTextfield" align="center"
 						style="color: #ffffff">투명도 : 100%</div>
