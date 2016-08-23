@@ -14,8 +14,8 @@ import java.util.ArrayList;
  * @���α׷� ���� :
  */
 public class Common {
-	//String websiteUrl = "http://water.nier.go.kr";
-	String websiteUrl = "http://localhost:8088";
+	String websiteUrl = "http://water.nier.go.kr";
+	//String websiteUrl = "http://localhost:8088";
 	
 	public String getWebsiteUrl() {
 		return websiteUrl;
