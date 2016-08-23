@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 
  */
 package Data.query;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class Common {
 	String websiteUrl = "http://water.nier.go.kr";
 	//String websiteUrl = "http://localhost:8088";
-	
+
 	public String getWebsiteUrl() {
 		return websiteUrl;
 	}

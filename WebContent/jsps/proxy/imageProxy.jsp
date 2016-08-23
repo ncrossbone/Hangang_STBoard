@@ -1,10 +1,10 @@
 <%@page import="Data.JsonClass"%>
 <%@page import="util.ConvertImage"%>
 <%@page session="false"%>
-<%@page import="java.net.*,java.io.*" %>
+<%@page import="java.net.*,java.io.*"%>
 <%@page import="Data.*"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+	pageEncoding="EUC-KR"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,7 +12,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%
+	<%
 	String todayDataString = request.getParameter("today");
 	String prevMonthString = request.getParameter("prevMonth");
 	String prevYearString = request.getParameter("prevYear");

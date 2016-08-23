@@ -80,6 +80,7 @@ function TopPanel(){
 			//멈춤
 			var topPanel = main.getTopPanel();
 			topPanel.pauseMove.apply(topPanel, []);
+			
 			$(".b_07 a").show();
 			$(".b_08 a").hide();
 			

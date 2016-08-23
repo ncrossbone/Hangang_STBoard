@@ -50,6 +50,7 @@
 		response.setContentType("text/json");
 		response.setHeader("Cache-Control", "no-cache");
 		printWriter.println(jsonResult);
+		//printWriter.println(queryString);
 		printWriter.close();
 	%>
 </body>

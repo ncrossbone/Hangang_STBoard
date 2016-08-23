@@ -62,7 +62,7 @@ function ControlPanel(){
 	var listChangeEventListener = new Array();
 	var settingButtonClickEventListener = new Array();
 	var settingWMSClickEventListener = new Array();
-	
+
 	/**
 	 * @Project     : hangang
 	 * @Date         : 2014. 3. 28. 
@@ -73,7 +73,7 @@ function ControlPanel(){
 	this.addSettingButtonClickEventListener = function(eventListener){
 		settingButtonClickEventListener.push(eventListener);
 	}
-	
+
 	/**
 	 * @Project     : hangang
 	 * @Date         : 2014. 3. 31. 
@@ -84,7 +84,7 @@ function ControlPanel(){
 	this.addSettingWMSClickEventListener = function(eventListener){
 		settingWMSClickEventListener.push(eventListener);
 	}
-	
+
 	/**
 	 * @Project     : hangang
 	 * @Date         : 2014. 3. 27. 
@@ -95,7 +95,7 @@ function ControlPanel(){
 	this.addSpotChangeEventListener = function(eventListener){
 		spotChangeEventListener.push(eventListener);
 	}
-	
+
 	/**
 	 * @Project     : hangang
 	 * @Date         : 2014. 3. 27. 
@@ -106,7 +106,7 @@ function ControlPanel(){
 	this.addListChangeEventListener = function(eventListener){
 		listChangeEventListener.push(eventListener);
 	}
-	
+
 	/**
 	 * @Project     : hangang
 	 * @Date         : 2014. 3. 27. 
@@ -122,7 +122,7 @@ function ControlPanel(){
 			}
 		}
 	}
-	
+
 	/**
 	 * @Project     : hangang
 	 * @Date         : 2014. 3. 27. 
@@ -138,7 +138,7 @@ function ControlPanel(){
 			}
 		}
 	}
-	
+
 	/**
 	 * @Project     : hangang
 	 * @Date         : 2014. 3. 28. 
@@ -170,7 +170,7 @@ function ControlPanel(){
 			}
 		}
 	}
-	
+
 	/**
 	 * @Project     : hangang
 	 * @Date         : 2014. 3. 27. 
@@ -185,12 +185,12 @@ function ControlPanel(){
 		//alert(listValue);
 		spotChangeEvent.setValue({spotValue : eval(spotValue)});
 		spotChangeEvent.setValue({listValue : eval(listValue)});
-		
+
 		for(var a = 0; a < spotChangeEventListener.length; a++){
 			spotChangeEventListener[a].apply(this, [spotChangeEvent]);
 		}
 	}
-	
+
 	/**
 	 * @Project     : hangang
 	 * @Date         : 2014. 3. 27. 
@@ -202,21 +202,21 @@ function ControlPanel(){
 		var listChangeEvent = new ListChangeEvent();
 		var listValue = $(target.currentTarget).val();
 		var spotValue;
-		
+
 		$('ul.place_box').find('input:checked').each(function(index, element){
 			if(element.value != ControlPanel.WATER_QAULITY_MONITORING_NETWORK){
 				spotValue = element.value;
 			}
 		});
-		
+
 		listChangeEvent.setValue({spotValue : eval(spotValue)});
 		listChangeEvent.setValue({listValue : eval(listValue)});
-		
+
 		for(var a = 0; a < listChangeEventListener.length; a++){
 			listChangeEventListener[a].apply(this, [listChangeEvent]);
 		}
 	}
-	
+
 	/**
 	 * @Project     : hangang
 	 * @Date         : 2014. 3. 28. 
@@ -225,37 +225,90 @@ function ControlPanel(){
 	 * @프로그램 설명 : 항목 구분 변경 이벤트를 발생시키는 메서드
 	 */
 	this.fireSettingButtonClickEvent = function(target){
+		
+		var topPanel = main.getTopPanel();
+		topPanel.stopMove();
+		$(".b_07 a").show();
+		$(".b_08 a").hide();
+		
 		var settingButtonClickEvent = new SettingButtonClickEvent();
 		var listValue = $('ul.item_box').find('input:checked').val();
 		var spotValue;
-		
-		$('ul.place_box').find('input:checked').each(function(index, element){
-			if(element.value != ControlPanel.WATER_QAULITY_MONITORING_NETWORK){
-				spotValue = element.value;
-			}
-		});
-		
+		var lon;
+		var lat;
+		var baseString ="javascript: ControlPanel."
+
+			$('ul.place_box').find('input:checked').each(function(index, element){
+				if(element.value != ControlPanel.WATER_QAULITY_MONITORING_NETWORK){
+					//적용버튼 클릭 시 중심점 이동 2016.04.06 hyeok 
+					switch(element.value){
+					case baseString+"WQMN_GENERAL_SPOT": 
+						lon=14164696.84856;
+						lat=4515350.941514;
+						break;
+					case baseString+"WQMN_TOTAL_SPOT":
+						lon=14182365.756059;
+						lat=4538645.1468495;
+						break;
+					case baseString+"WQMN_REPRESECTATION_MIDDLE_SECTION":
+						lon=14169651.237678;
+						lat=4512628.669361;
+						break;
+					case baseString+"WQMN_MAIN_SPOT":
+						lon=14169651.237678;
+						lat=4512628.669361;
+						break;
+					case baseString+"WQMN_BO_SPOT":
+						lon=14213993.276218;
+						lat=4476709.6953706;
+						break;
+					case baseString+"WQMN_FORECAST_SPOT":
+						lon=14176442.713284;
+						lat=4526914.959065;
+						break;
+					case baseString+"AUTOMATIC_MEASUREMENT_NETWORK":
+						lon=14180123.866517;
+						lat=4533454.2233111;
+						break;
+					case baseString+"TIDE_MEASUREMENT_NETWORK":
+						lon=14169116.817906;
+						lat=4540262.5936187;
+						break;
+					case baseString+"DAM_BO":
+						lon=14167876.49611;
+						lat=4513297.8423883;
+						break;
+
+					}
+					map.setCenter(new OpenLayers.LonLat(lon, lat),
+							15);
+
+					spotValue = element.value;
+				}
+			});
+
 		settingButtonClickEvent.setValue({spotValue : eval(spotValue)});
 		settingButtonClickEvent.setValue({listValue : eval(listValue)});
-		
+
 		for(var a = 0; a < settingButtonClickEventListener .length; a++){
 			settingButtonClickEventListener [a].apply(this, [settingButtonClickEvent]);
 		}
-		
-		
+
+
 		$( "#dialog-modal" ).dialog({
 			height: 140,
 			modal: true
 		});
-		
-		 var progressbar = $( "#progressbar" ),
-	      progressLabel = $( ".progress-label" );
-	 
-	    progressbar.progressbar({
-	      value: false
-	    });
-	    
-	    $("#opacitySlider").slider("value", 100);
+
+		var progressbar = $( "#progressbar" ),
+		progressLabel = $( ".progress-label" );
+
+		progressbar.progressbar({
+			value: false
+		});
+
+		$("#opacitySlider").slider("value", 100);
+
 	}
 
 	/**
@@ -268,7 +321,7 @@ function ControlPanel(){
 	this.fireSettingwmsClickEvent = function(){
 		var settingWMSClickEvent = new WMSChangeEvent();
 		var checkedList = new Array();
-		
+
 		$('ul.wms_box').find('input').each(function(index, element){
 			if(element.checked == true){
 				checkedList.push({
@@ -286,12 +339,12 @@ function ControlPanel(){
 		});
 
 		settingWMSClickEvent.setValue({spotValue : checkedList});
-		
+
 		for(var a = 0; a < settingWMSClickEventListener .length; a++){
 			settingWMSClickEventListener [a].apply(this, [settingWMSClickEvent]);
 		}	
 	}
-	
+
 	/**
 	 * @Project     : hangang
 	 * @Date         : 2014. 3. 27. 
@@ -302,10 +355,10 @@ function ControlPanel(){
 	this.init = function(){
 		defaultUI();
 		setEvent();
-		
+
 		this.changeListInputVisiable(2);
 	}
-	
+
 	/**
 	 * @Project     : hangang
 	 * @Date         : 2014. 3. 27. 
@@ -325,12 +378,12 @@ function ControlPanel(){
 						element.checked = false;
 					}
 				});
-				
+
 				var $sujilInput = $('input[name="WATER_QAULITY_MONITORING_NETWORK"]');
-				
+
 				if(value > ControlPanel.WATER_QAULITY_MONITORING_NETWORK && value < ControlPanel.AUTOMATIC_MEASUREMENT_NETWORK){
 					//수질측정망 이하의 항목
-					
+
 					$sujilInput[0].checked = true;
 				}else if(value != ControlPanel.WATER_QAULITY_MONITORING_NETWORK){
 					$('input[name="WATER_QAULITY_MONITORING_NETWORK"]').removeAttr("checked");
@@ -342,7 +395,7 @@ function ControlPanel(){
 					$('input[name="WATER_QAULITY_MONITORING_NETWORK"]')[0].checked = true;
 					$('input[name="WQMN_GENERAL_SPOT"]')[0].checked = true;
 				}
-				
+
 				main.getControlPanel().changeListInputVisiable(value);
 			}else{
 				//체크가 풀린것 다시 체크한다.
@@ -350,21 +403,21 @@ function ControlPanel(){
 				return false;
 			}
 		});
-		
+
 		$("#settingButton").click(function(target){
 			main.getControlPanel().fireSettingButtonClickEvent(target);
 		});
-		
+
 		//wms on/off 
 		$('ul.wms_box').find('input').change(function(target){
 			main.getControlPanel().fireSettingwmsClickEvent();
 		});
-		
+
 		$(".left_close").click(function(event){
 			main.getControlPanel().controlPanelShowAndHide();
 		});
 	}
-	
+ 
 	/**
 	 * @Project     : hangang
 	 * @Date         : 2014. 4. 01. 
@@ -378,36 +431,36 @@ function ControlPanel(){
 		var $topArea = $("#Top_Area");
 		var $leftClick = $(".left_close");
 		var height = 0;
-		
+
 		if($accordion.css("opacity") == 1){
-			
+
 			//접기
 			height = $wrapAccordion.height() - $topArea.height();
-			
+
 			$wrapAccordion.animate({
 				top : "-" + height  + "px"
 			}, 1000);
-			
+
 			$accordion.animate({
 				opacity : 0
 			}, 1000);
-			
+
 			$(".left_close").css("background", "url(../resources/img/left_menu_open.png) no-repeat");
 		}else{
 			height = $topArea.height();
-			
+
 			$wrapAccordion.animate({
 				top : height + "px"
 			}, 1000);
-			
+
 			$accordion.animate({
 				opacity : 1
 			}, 1000);
-			
+
 			$(".left_close").css("background", "url(../resources/img/left_menu_close.png) no-repeat");
 		}
 	}
-	
+
 	/**
 	 * @Project     : hangang
 	 * @Date         : 2014. 4. 01. 
@@ -432,10 +485,10 @@ function ControlPanel(){
 			viewValue = [ ControlPanel.BOD, ControlPanel.CHL_A, ControlPanel.TP, ControlPanel.TEMP, ControlPanel.COD, ControlPanel.PH, ControlPanel.DO, ControlPanel.TN, ControlPanel.TOTAL_TIDE, ControlPanel.YU];
 		}else if(ControlPanel.WQMN_FORECAST_SPOT == value){
 			viewValue = [ ControlPanel.BOD, ControlPanel.CHL_A, ControlPanel.TP, ControlPanel.TEMP, ControlPanel.COD, ControlPanel.PH, ControlPanel.DO, ControlPanel.TN, ControlPanel.TOTAL_TIDE, ControlPanel.YU];
-		
+
 		}else if(ControlPanel.AUTOMATIC_MEASUREMENT_NETWORK == value){
 			viewValue = [ ControlPanel.TEMP, ControlPanel.PH, ControlPanel.DO, ControlPanel.EC, ControlPanel.MS, ControlPanel.CHL_A, ControlPanel.TOC, ControlPanel.TAKDO, ControlPanel.TN, ControlPanel.TP, ControlPanel.VOCS  ];
-		
+
 		}else if(ControlPanel.TIDE_MEASUREMENT_NETWORK == value){//조류 측정망
 			viewValue = [ ControlPanel.CHL_A, ControlPanel.TOTAL_TIDE, ControlPanel.TEMP, ControlPanel.BOD, ControlPanel.TP, ControlPanel.PH, ControlPanel.DO, ControlPanel.COD, ControlPanel.TN, ControlPanel.CYA, ControlPanel.CHL, ControlPanel.DIA ];
 		}else if(ControlPanel.IP_USN == value){
@@ -445,7 +498,7 @@ function ControlPanel(){
 		}
 		$("#item_box").empty();
 		for(var a = 0; a < viewValue.length; a++){
-		
+
 			if(viewValue[a]==ControlPanel.BOD){
 				$("#item_box").append("<li><input name='BOD' type='checkbox' value='javascript : ControlPanel.BOD' checked='checked' >BOD</li>");
 			}else if(viewValue[a]==ControlPanel.CHL_A){
@@ -473,12 +526,12 @@ function ControlPanel(){
 			}else if(viewValue[a]==ControlPanel.EC){
 				$("#item_box").append("<li><input name='EC' type='checkbox' value='javascript : ControlPanel.EC'>EC</li>");
 			}else if(viewValue[a]==ControlPanel.MS){
-				
+
 			}else if(viewValue[a]==ControlPanel.AHI){
-					
+
 			}else if(viewValue[a]==ControlPanel.VOCS){
 				$("#item_box").append("<li><input name='VOCS' type='checkbox' value='javascript : ControlPanel.VOCS'>VOCs</li>");
-				
+
 			}else if(viewValue[a]==ControlPanel.CYA){
 				$("#item_box").append("<li><input name='CYA' type='checkbox' value='javascript : ControlPanel.CYA'>남조류</li>");
 			}else if(viewValue[a]==ControlPanel.CHL){
@@ -488,7 +541,7 @@ function ControlPanel(){
 			}else if(viewValue[a]==ControlPanel.ELE){
 				$("#item_box").append("<li><input name='ELE' type='checkbox' value='javascript : ControlPanel.ELE'>전기전도도</li>");
 			}else if(viewValue[a]==ControlPanel.WAI){
-				
+
 			}else if(viewValue[a]==ControlPanel.RS){
 				$("#item_box").append("<li><input name='RS' type='checkbox' value='javascript : ControlPanel.RS'>수위</li>");
 			}else if(viewValue[a]==ControlPanel.RA){
@@ -500,97 +553,97 @@ function ControlPanel(){
 			}else if(viewValue[a]==ControlPanel.TB){
 				$("#item_box").append("<li><input name='TB' type='checkbox' value='javascript : ControlPanel.TB'>공용량</li>");
 			}
-			
-			
+
+
 //			if(viewValue[a]==ControlPanel.BOD){
-//				$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.BOD' checked='checked' >BOD</li>");
+//			$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.BOD' checked='checked' >BOD</li>");
 //			}else if(viewValue[a]==ControlPanel.CHL_A){
-//				$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.CHL_A'>Chl-a</li>");
+//			$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.CHL_A'>Chl-a</li>");
 //			}else if(viewValue[a]==ControlPanel.TP){
-//				$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.TP'>TP</li>");
+//			$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.TP'>TP</li>");
 //			}else if(viewValue[a]==ControlPanel.TEMP){
-//				$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.TEMP'>수온</li>");
+//			$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.TEMP'>수온</li>");
 //			}else if(viewValue[a]==ControlPanel.COD){
-//				$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.COD'>COD</li>");
+//			$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.COD'>COD</li>");
 //			}else if(viewValue[a]==ControlPanel.PH){
-//				$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.PH'>pH</li>");
+//			$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.PH'>pH</li>");
 //			}else if(viewValue[a]==ControlPanel.DO){
-//				$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.DO'>DO</li>");
+//			$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.DO'>DO</li>");
 //			}else if(viewValue[a]==ControlPanel.TN){
-//				$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.TN'>TN</li>");
+//			$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.TN'>TN</li>");
 //			}else if(viewValue[a]==ControlPanel.TOTAL_TIDE){
-//				$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.TOTAL_TIDE'>총조류</li>");
+//			$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.TOTAL_TIDE'>총조류</li>");
 //			}else if(viewValue[a]==ControlPanel.YU){
-//				$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.YU'>유량</li>");
+//			$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.YU'>유량</li>");
 //			}else if(viewValue[a]==ControlPanel.TAKDO){
-//				$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.TAKDO'>탁도</li>");
+//			$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.TAKDO'>탁도</li>");
 //			}else if(viewValue[a]==ControlPanel.TOC){
-//				$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.TOC'>TOC</li>");
+//			$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.TOC'>TOC</li>");
 //			}else if(viewValue[a]==ControlPanel.EC){
-//				$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.EC'>EC</li>");
+//			$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.EC'>EC</li>");
 //			}else if(viewValue[a]==ControlPanel.MS){
-//				
+
 //			}else if(viewValue[a]==ControlPanel.AHI){
-//					
+
 //			}else if(viewValue[a]==ControlPanel.VOCS){
-//				$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.VOCS'>VOCs</li>");
-//				
+//			$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.VOCS'>VOCs</li>");
+
 //			}else if(viewValue[a]==ControlPanel.CYA){
-//				$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.CYA'>남조류</li>");
+//			$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.CYA'>남조류</li>");
 //			}else if(viewValue[a]==ControlPanel.CHL){
-//				$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.CHL'>녹조류</li>");
+//			$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.CHL'>녹조류</li>");
 //			}else if(viewValue[a]==ControlPanel.DIA){
-//				$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.DIA'>규조류</li>");
+//			$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.DIA'>규조류</li>");
 //			}else if(viewValue[a]==ControlPanel.ELE){
-//				$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.ELE'>전기전도도</li>");
+//			$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.ELE'>전기전도도</li>");
 //			}else if(viewValue[a]==ControlPanel.WAI){
-//				
+
 //			}else if(viewValue[a]==ControlPanel.RS){
-//				$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.RS'>수위</li>");
+//			$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.RS'>수위</li>");
 //			}else if(viewValue[a]==ControlPanel.RA){
-//				$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.RA'>유입량</li>");
+//			$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.RA'>유입량</li>");
 //			}else if(viewValue[a]==ControlPanel.GO){
-//				$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.GO'>총뱡류량</li>");
+//			$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.GO'>총뱡류량</li>");
 //			}else if(viewValue[a]==ControlPanel.YI){
-//				$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.YI'>저수량</li>");
+//			$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.YI'>저수량</li>");
 //			}else if(viewValue[a]==ControlPanel.TB){
-//				$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.TB'>공용량</li>");
+//			$("#item_box").append("<li><input name='ITEMGUBUN' type='checkbox' value='javascript : ControlPanel.TB'>공용량</li>");
 //			}
 		}
-		
+
 //		$('ul.item_box').find('input').each(function(index, element){
-//			for(var a = 0; a < viewValue.length; a++){
-//				var parent = $(element).parent('li');
-//				if(eval(element.value) == viewValue[a]){
-//					$(parent).css("display", "block");
-//					break;
-//				}else{
-//					$(parent).css("display", "none");
-//				}
-//			}
+//		for(var a = 0; a < viewValue.length; a++){
+//		var parent = $(element).parent('li');
+//		if(eval(element.value) == viewValue[a]){
+//		$(parent).css("display", "block");
+//		break;
+//		}else{
+//		$(parent).css("display", "none");
+//		}
+//		}
 //		});
-//		
+
 		$('ul.item_box').find('input').each(function(index, element){
 			if(index==0){
 				$("input:checkbox[name='"+element.name+"']").attr("checked", true);
 			}else{
 				$("input:checkbox[name='"+element.name+"']").attr("checked", false);
 			}
-			
+
 			//element.checked = false;
 		});
 		$('#item_box').find('input').change(function(target){
 			var value = eval($(target.currentTarget).val());
 			//이벤트 주체
 			var currentTarget = target.currentTarget;
-			
+
 			if(currentTarget.checked == true){
 				$('ul.item_box').find('input').each(function(index, element){
 					if(currentTarget !== element && element.checked == true){
 						element.checked = false;
 					}
 				});
-				
+
 				main.getControlPanel().fireListChangeEvent(target);
 			}else{
 				currentTarget.checked = true;
@@ -598,17 +651,17 @@ function ControlPanel(){
 			}
 		});
 //		$('ul.item_box').find('input').each(function(index, element){
-//			var $parent = $(element).parent('li');
-//			var display = $parent.css("display");
-//			
-//			if(display == 'block'){
-//				element.checked = true;
-//				
-//				return false;
-//			}
+//		var $parent = $(element).parent('li');
+//		var display = $parent.css("display");
+
+//		if(display == 'block'){
+//		element.checked = true;
+
+//		return false;
+//		}
 //		});
 	}
-	
+
 	/**
 	 * @Project     : hangang
 	 * @Date         : 2014. 3. 27. 
@@ -620,20 +673,20 @@ function ControlPanel(){
 		$("#accordion").accordion({
 			heightSytle : "content"
 		});
-		
+
 		$("#opacitySlider").slider({
-	      orientation: "horizontal",
-	      min: 0,
-	      max: 100,
-	      value: 100,
-	      slide: function(){
-	    	  var val = $("#opacitySlider").slider( "value" );
-	    	  var mapClass = main.getMapManager();
-	    	  
-	    	  mapClass.setOpacity.apply(mapClass, [ TwoDMap.CHART_VECTOR_LAYER_NAME, val / 100 ]);
-	    	  
-	    	  $("#opacityTextfield").html("투명도 : " + val + "%");
-	      }
-	    });
+			orientation: "horizontal",
+			min: 0,
+			max: 100,
+			value: 100,
+			slide: function(){
+				var val = $("#opacitySlider").slider( "value" );
+				var mapClass = main.getMapManager();
+
+				mapClass.setOpacity.apply(mapClass, [ TwoDMap.CHART_VECTOR_LAYER_NAME, val / 100 ]);
+
+				$("#opacityTextfield").html("투명도 : " + val + "%");
+			}
+		});
 	}
 }
