@@ -14,9 +14,9 @@ import java.util.ArrayList;
  * @���α׷� ���� :
  */
 public class Common {
-<<<<<<< HEAD
+
 	
-	/*local url*/
+
 	String websiteUrl = "http://localhost:8088";
 	
 	/*testserver url*/
@@ -25,11 +25,10 @@ public class Common {
 	/*server url*/
 	//String websiteUrl = "http://water.nier.go.kr";
 		
-=======
-	String websiteUrl = "http://water.nier.go.kr";
+
+	//String websiteUrl = "http://water.nier.go.kr";
 	//String websiteUrl = "http://localhost:8088";
 
->>>>>>> 3e18b0983cf3f74e029aa2efd610561fb6ae1938
 	public String getWebsiteUrl() {
 		return websiteUrl;
 	}
