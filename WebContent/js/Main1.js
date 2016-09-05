@@ -9,19 +9,20 @@
 function Main() {
 	var twoDMapClass = null;
 	var threeDMapClass = null;
-
+	
 	var mapManager = null;
 
 	var controlPanel = null;
 	var footerPanel = null;
 	var topPanel = null;
+	
 	this.alarmDataCollection = {};
 	this.alarmDataKeys = null;
 	this.alarmDataKeys1 = null;
 
 	this.alarmNowMmpNum = 0;
 	this.alarmNowMsmLtNum = 0;
-
+	
 	/**
 	 * 
 	 * @Date : 2014. 3. 24.

@@ -186,7 +186,7 @@ H1 {
 
 /*오른쪽 상단*/
 .top_right {
-	width: 630px;
+	width: 1200px;
 	height: 118px;
 	float: right;
 	margin-right: 0px;
@@ -195,8 +195,8 @@ H1 {
 
 .map_kind {
 	position: absolute;
-	top: 20px;
-	left: 0px;
+	top: 19px;
+	left: 900px;
 }
 
 .map_kind li {
@@ -244,7 +244,7 @@ H1 {
 	background-repeat: no-repeat;
 	position: absolute;
 	top: 0px;
-	left: 304px;
+	left: 700px;
 }
 
 #select_01 {
@@ -259,7 +259,23 @@ H1 {
 	letter-spacing: -1px;
 }
 
+#select_02 {
+	width: 174px;
+	height: 30px;
+	padding-left: 9px;
+}
+
+.select_02 {
+	font-size: 12px;
+	font-weight: bold;
+	letter-spacing: -1px;
+}
+
 #Link {
+	width: 170px;
+}
+
+#Link_2 {
 	width: 170px;
 }
 
@@ -308,6 +324,8 @@ H1 {
 	color: #606060;
 }
 
+
+
 .selectlayer ul li a {
 	display: block;
 	height: 18px;
@@ -328,20 +346,99 @@ H1 {
 	color: #141517;
 }
 
-.date_txt {
+.selectlayer_2 {
+	display: block;
+	position: relative;
+	top: 9px;
+	height: 18px;
+	width: 170px;
+	background: url(../img/select_menu_arrow.png) 154px 3px no-repeat;
+	cursor: pointer;
+	position: realtive;
+	margin-top: 5px;
+}
+
+.selectlayer_2 a.default {
+	display: block;
+	height: 18px;
+	background: url('../img/ico_selectdown.gif');
+	color: #000;
+	line-height: 18px;
+	text-decoration: none;
+	font-weight: bold;
+	letter-spacing: -1px;
+}
+
+.selectlayer_2 a.default:hover {
+	text-decoration: none;
+}
+
+.selectlayer_2 ul {
+	position: absolute;
+	left: -1px;
+	top: 21px;
+	display: none;
+	width: 100%;
+	background-color: #ffffff;
+	border: 1px solid #c2c2c2;
+	z-index: 10001;
+	height: 100px;
+	overflow-y: auto
+}
+
+.selectlayer_2 ul li {
+	display: block;
+	width: 100%;
+	letter-spacing: -1px;
+	margin-bottom: 5px;
+	color: #606060;
+}
+
+
+
+.selectlayer_2 ul li a {
+	display: block;
+	height: 18px;
+	padding: 0 0 0 5px;
+	color: #606060;
+	line-height: 20px;
+	text-decoration: none;
+}
+
+.selectlayer_2 ul li a:hover {
+	background-color: #9b9c9c;
+	color: #141517;
+	text-decoration: none;
+}
+
+.selectlayer_2 ul li a.selected {
+	background-color: #9b9c9c;
+	color: #141517;
+}
+
+
+
+
+
+#detailTable table tr, td {
+    border: 1px gray solid;
+    text-align: center;
+}
+
+/* .date_txt {
 	position: relative;
 	width: 170px;
 	color: #083b57;
 	margin-top: 16px;
 	top: 13px;
-}
+} */
 
 .roll_area_info {
-	width: 130px;
+	width: 420px;
 	height: 55px;
 	position: absolute;
 	top: 10px;
-	left: 500px;
+	left: 200px;
 }
 
 .roll_area_info img {
@@ -501,20 +598,21 @@ H3 span { position: absolute; left: 305px; top: 5px; cursor: pointer; display: b
 }
 /*하단*/
 #bottom {
-	width: 94%;
+	width: 100%;
 	height: 49px;
 	background-image: url(../img/bottom_bg.gif);
 	background-repeat: repeat-x;
 	position: relative;
-	padding: 0 3% 0 3%;
+	/* padding: 0 3% 0 3%; */
 }
 
 .item {
-	width: 6%;
+	width: 160px;
 	font-size: 16px;
 	font-weight: bold;
 	color: #002f59;
 	padding-top: 10px;
+	padding-left: 30px;
 	float: left;
 }
 

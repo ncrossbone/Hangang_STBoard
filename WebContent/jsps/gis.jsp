@@ -13,17 +13,17 @@
 	type="text/css">
 
 
- 
+
 <script type="text/javascript" src="../js/jquery-1.11.0.js"></script>
 <script src="../js/jquery-ui.js" type="text/javascript"></script>
 <script src="http://www.openlayers.org/api/2.13/OpenLayers.js"
 	type="text/javascript"></script>
 <!-- http://water.nier.go.kr/hangang/jsps/gis.jsp 인증키 (실서버) -->
-<SCRIPT language="JavaScript" type="text/javascript"
-	src="http://map.vworld.kr/js/vworldMapInit.js.do?apiKey=50C07490-F9B8-3C00-AB72-D85946AF22B8"></SCRIPT>
-<!--  http://localhost:8088 인증키 -->
 <!-- <SCRIPT language="JavaScript" type="text/javascript"
-	src="http://map.vworld.kr/js/vworldMapInit.js.do?apiKey=327DE1AD-04CC-34BA-A460-9F63CBD158C0"></SCRIPT>-->
+	src="http://map.vworld.kr/js/vworldMapInit.js.do?apiKey=50C07490-F9B8-3C00-AB72-D85946AF22B8"></SCRIPT> -->
+<!--  http://localhost:8088 인증키 -->
+<SCRIPT language="JavaScript" type="text/javascript"
+	src="http://map.vworld.kr/js/vworldMapInit.js.do?apiKey=327DE1AD-04CC-34BA-A460-9F63CBD158C0"></SCRIPT>
 
 <script type="text/javascript" src="../js/common/Common.js"></script>
 <script type="text/javascript" src="../js/Main1.js"></script>
@@ -80,15 +80,24 @@
 		main.init();
 		$(".b_08 a").hide();
 	});
+	var _selectAutoPlay = null;
 </script>
 
 <script type="text/javascript">
 	var select = {
 		action : function(el, state) {
 			// state = 0 or 1
+			
+			
 			var SelectElement = document.getElementById(el.id);
 			var ListElement = SelectElement.getElementsByTagName("ul")[0];
 			var ActionElement = ListElement.getElementsByTagName("a");
+
+			if(ActionElement[0].firstChild==null){
+				alert("중권역을 선택하세요");
+				return;
+			}			
+			
 			if (ListElement.style.display == "block") {
 				select.close(ListElement);
 				return false;
@@ -98,6 +107,7 @@
 
 			var strSelected = SelectElement.getElementsByTagName("a")[0];
 			strSelected.focus();
+			
 			for (var i = 0; i < ActionElement.length; i++) {
 				if (strSelected.firstChild.nodeValue == ActionElement[i].firstChild.nodeValue) {
 					select.elementClass = ActionElement[i];
@@ -141,11 +151,15 @@
 
 		},
 		close : function(el) {
-			select.elementClass.className = "";
+			//select.elementClass.className = "";
 			el.style.display = "none";
 			return false;
 		}
 	}
+	
+	
+	
+	
 	function getTwoDMap() {
 		$(".b_08 a").trigger('click');
 		main.getTwoDMap().setMapType(Map.BASE_MAP);
@@ -184,14 +198,12 @@
 					</ul>
 				</div>
 			</div>
+
 			<!--왼쪽상단(CI+버튼제어)-->
 			<!--우측상단-->
+			
 			<div class="top_right">
-				<ul class="map_kind">
-					<li class="map_02"><a href="javascript:getTwoDRealMap();"></a></li>
-					<li class="map_01"><a href="javascript:getTwoDMap();"></a></li>
-					<li class="map_03"><a href="javascript:getThreeDMap();"></a></li>
-				</ul>
+				<div id="detailTable"></div>
 				<div class="select_date">
 					<div id="select_01">
 						<div id="Link" class="selectlayer"
@@ -208,23 +220,39 @@
 								<li><a href="#">표준권역 대표지점</a></li>
 							</ul>
 						</div>
-						<p class="date_txt">2014년 03월 25일 15:35</p>
 					</div>
+					<div id="select_02">
+						<div id="Link_2" class="selectlayer_2" onClick="select.action(this,1);">
+					 		<p>
+								<a href="#" class="default" onClick="return false;">지점을 선택하세요.</a>
+							</p>
+							<ul id="selectOptions_2">
+								<li><a href="#"></a></li>
+							</ul>
+						</div>
+					</div>
+					<!-- <select id="selectJung"><option>중권역을 선택하세요</option></select> -->
 				</div>
-				<div class="roll_area_info">
-					<img id="alarmImg" src="../resources/img/siren_01.png">
+				<!-- <div class="roll_area_info"> -->
+					
+					<ul class="map_kind">
+					<li class="map_02"><a href="javascript:getTwoDRealMap();"></a></li>
+					<li class="map_01"><a href="javascript:getTwoDMap();"></a></li>
+					<li class="map_03"><a href="javascript:getThreeDMap();"></a></li>
+				</ul>
+					<!-- <img id="alarmImg" src="../resources/img/siren_01.png">
 					<ul class="data_form">
 						<li><font id="mmpNameText">홍천군</font></li>
 						<li><font id="colDdDtText">24.5</font></li>
 						<li><font id="msmLtNmText">24.5</font></li>
-					</ul>
-				</div>
+					</ul> -->
+				<!-- </div> -->
+				
 			</div>
 
 			<div
 				style="top: 85px; right: 30px; color: #ffffff; position: absolute; font-weight: bold; text-shadow: 0.1em 0.1em 0.05em #333">
-				<font id="measureName" size=5>BOD</font><font id="measureName2"
-					size=2>(㎎/L)</font>
+				<font id="measureName" size=5>BOD</font><font id="measureName2" size=2>(㎎/L)</font>
 			</div>
 		</div>
 		<!--우측상단-->
@@ -666,8 +694,9 @@
 		</div>
 		<div id="bottom">
 			<!-- <div class="item">BOD</div><div class="item2">("㎎/L")</div> -->
-			<div class="item">
-				<font id="item" size=5>BOD</font><font id="item2" size=2>(㎎/L)</font>
+			<div class="item" style="text-align: center;">
+				<font id="item" size=4>BOD</font><font id="item2" size=2>(㎎/L)</font>
+				<div id="item3" style="width: 200px;">시간</div>
 			</div>
 			<div class="area_name"></div>
 			<div id="Data_Rolling" style="overflow: hidden;">
@@ -679,8 +708,9 @@
 				<div class="copyright">
 					<img src="../resources/img/copyright.png">
 				</div>
+				
 			</div>
-
+			<p class="date_txt" style="padding-left: 1760px; padding-top: 18px;">2014년 03월 25일 15:35</p>
 		</div>
 
 		<div id="dialog-modal" title="알림">

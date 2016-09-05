@@ -115,6 +115,18 @@ function FooterPanel(){
 		
 		$("#item").html(measureName);
 		$("#item2").html(measureName2);
+	
+		$.ajax({
+			url : "../jsps/queryData/getQueryData.jsp?queryNum=44&measure=" + value,
+			dataType : "json"
+		}).done(function(data){
+			var result = data.d[0];
+			if(result[0].min!=result[0].max){
+			$("#item3").html(result[0].min+"~"+result[0].max);
+			}else{
+			$("#item3").html(result[0].min);	
+			}
+		});
 		
 		$.ajax({
 			url : "../jsps/queryData/getQueryData.jsp?requestType=2&queryNum=42&measure=" + listValue + "&spotGubun=" + value,
@@ -133,6 +145,10 @@ function FooterPanel(){
 			
 			main.getFooterPanel().playTextAnimation();
 		});
+		
+		
+		
+		
 	}
 	
 	/**

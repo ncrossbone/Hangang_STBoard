@@ -14,7 +14,8 @@ function TopPanel(){
 	this.autoListIndex = 0;
 	this.isPause = false;
 	this.isSeached = false;
-	
+	this.jungCode = null;
+	this.measure = null;
 	this.autoList = {
 			//14.07.22 박순형 모든지점 자동기능 추가
 			// khLee 20151115 항목 추가
@@ -57,6 +58,7 @@ function TopPanel(){
 	 */
 	function initEvent(){
 		//14.09.16 박순형 상단 버튼 이벤트 수정
+		$(".b_07 a").unbind("click");
 		$(".b_07 a").click(function(){
 			var topPanel = main.getTopPanel();
 			
@@ -68,13 +70,14 @@ function TopPanel(){
 				alert("해당 지점은 재생 기능을 제공하지 않습니다.");
 			}else{
 				topPanel.playAutoPlay.apply(topPanel, []);
-				
 				topPanel.isAuto = true;
 				isPause = false;
-				$(".b_07 a").hide();
+				$(".b_07 a").hide();  
 				$(".b_08 a").show();
 			}
 		});
+		
+		
 		
 		$(".b_08 a").click(function(){
 			//멈춤
@@ -83,7 +86,7 @@ function TopPanel(){
 			
 			$(".b_07 a").show();
 			$(".b_08 a").hide();
-			
+			_selectAutoPlay = null;
 		});
 		
 		$(".b_09 a").click(function(){
@@ -92,7 +95,7 @@ function TopPanel(){
 			topPanel.stopMove.apply(topPanel, []);
 		});
 		main.getTopPanel().changeTime();
-		setInterval("main.getTopPanel().changeTime()", 10 * 1000)
+		setInterval("main.getTopPanel().changeTime()", 1000)
 	}
 	
 	this.changeTime = function(){
@@ -103,8 +106,20 @@ function TopPanel(){
 		
 		var hour = now.getHours();
 		var minutes = now.getMinutes();
+		var sec = now.getSeconds();
 		
-		$(".date_txt").html(year + "년 " + month +"월 " + day + "일 " + hour + ":" + minutes);
+		$(".date_txt").html(year + "년 " + addZeros(month,2) +"월 " + addZeros(day,2) + "일 " + addZeros(hour,2) + ":" + addZeros(minutes,2)+":"+addZeros(sec,2));
+	}
+	
+	function addZeros(num, digit) { // 자릿수 맞춰주기
+		  var zero = '';
+		  num = num.toString();
+		  if (num.length < digit) {
+		    for (i = 0; i < digit - num.length; i++) {
+		      zero += '0';
+		    }
+		  }
+		  return zero + num;
 	}
 	
 	/**
@@ -177,41 +192,60 @@ function TopPanel(){
 	 * @프로그램 설명 : auto move을 수행하는 메서드
 	 */
 	this.playAutoPlay = function(){
-		//console.info(this.autoData);
-		if(this.isPause == true || this.isSeached){
-			//console.info("aa");
-			var data = this.autoData[this.autoDataIndex];
+		
 
+
+		if(this.isPause == true || this.isSeached){
+
+			var data = this.autoData[this.autoDataIndex];
 			var x = data.x;
 			var y = data.y;
-			
 			var map = main.getTwoDMap().getMap();
 			var lonlat = new OpenLayers.LonLat(x, y); 
+
+			this.selectJung(null,null,data.MMP_CD,data.PT_DIV_CD);
 			
 			if(vworld.is3D()){
 				lonlat.transform(new OpenLayers.Projection("EPSG:900913"), new OpenLayers.Projection("EPSG:4326"));
 //				SOPPlugin.getViewCamera().moveLonLatAlt(lonlat.lon, lonlat.lat, 500);
 				SOPPlugin.getViewCamera().moveLonLatAltOval(lonlat.lon, lonlat.lat, (Map.CHART_ALTITUDE.max - 1000), 10);
 			}else{
-				map.setCenter(lonlat, Map.CHART_ZOOM_LEVEL.min);
+				
+				if(_selectAutoPlay!=null){
+					var selectAutoDataIndex = "";
+					for(var i = 0; i<this.autoData.length; i++){
+						if(_selectAutoPlay==this.autoData[i].MMP_CD){
+							selectAutoDataIndex=this.autoData[i].AT_ORD;
+						}
+					}
+					this.autoDataIndex = selectAutoDataIndex;
+					_selectAutoPlay = null;
+				}else{
+					this.autoDataIndex++;
+					map.setCenter(lonlat, Map.CHART_ZOOM_LEVEL.min);
+				}
+				
+				
+				
 			}
 			
-			this.autoDataIndex++;
 			
+
 			//수질측정망을 제외한 지점에 팔당댐 포인트를 추가하지 않기 위해서 
 			//쿼리상에서 팔담댕을 union하는 구문이 있기 때문에 팔당댐을 한번 거른다
 			if(this.autoData.length != this.autoDataIndex && this.autoData[this.autoDataIndex].mmpNm == "팔당댐"){
 				this.autoDataIndex++;
 			}
-			
+
 			if(this.autoData.length == this.autoDataIndex){
 				this.autoDataIndex = 0;
 				this.autoListIndex++;
-				
+
 				if(this.autoListIndex == getAutoCheckList().length){
 					this.autoListIndex = 0;
 				}
 				this.isSeached = false;
+				//console.info("1");
 				this.timeout = setTimeout("main.getTopPanel().playAutoPlay()",8000);
 				//this.timeout = setTimeout("main.getTopPanel().playAutoPlay()",100); // khLee test
 			}else{
@@ -224,27 +258,159 @@ function TopPanel(){
 					intervalTime = 8000;
 					//intervalTime = 100; // khLee test
 				}
+				//console.info(intervalTime);
+				//console.info(lonlat);
+
 				this.timeout = setTimeout("main.getTopPanel().playAutoPlay.apply(main.getTopPanel(), [])", intervalTime);
+				//this.timeout = setTimeout("console.info('zz')", intervalTime);
 			}
 		}else{
-			//console.info("dd");
-			var checkList = getAutoCheckList();
-			var itemValue = checkList[this.autoListIndex];
+			if(_selectAutoPlay==null){
+				var checkList = getAutoCheckList();
+				var itemValue = checkList[this.autoListIndex];
+
+				$('input[value="' + itemValue + '"]').trigger( "click" );
+				$('#treeview1 input').each(function(index, element){
+					if(eval($(element).val()) == itemValue){
+						$(element).trigger('click');
+
+						return false;
+					}
+
+				});
+
+				$("#settingButton").trigger("click");
+				this.isSeached = true;
+				main.getTopPanel().playAutoPlay.apply(main.getTopPanel(), []);
+				$(".b_07 a").hide();  
+				$(".b_08 a").show();
+			}else{
+				this.isSeached = true;
+				main.getTopPanel().playAutoPlay.apply(main.getTopPanel(), []);
+				$(".b_07 a").hide();  
+				$(".b_08 a").show();
+			}
+		}
+		
+	}
+	
+	this.selectJung = function(coordX,coordY,code,measure){
+		
+		
+		if(coordX!=null){
 			
-			$('input[value="' + itemValue + '"]').trigger( "click" );
-			$('#treeview1 input').each(function(index, element){
-				
-				if(eval($(element).val()) == itemValue){
-					$(element).trigger('click');
+			map.setCenter(new OpenLayers.LonLat(coordX,coordY),15);
+			_selectAutoPlay = code;
+			
+			if($(".b_08 a").css("display")!="none"){
+				$(".b_08 a").trigger("click");
+			}
+
+		}
+		$.ajax({
+			url : "../jsps/queryData/getQueryData.jsp?queryNum=43&mmpcd="+code+"&measure="+measure,
+			dataType : "json"
+		}).done(function(data){
+			var html = "";
+			var result = data.d[0];
+			
+			if(result!=null){
+				var arrayList = new Array(result.length);
+				for (var i = 0; i < result.length; i++) {
+
+					if(result[i].COL_DD_DT !=""){
+						arrayList[i] = result[i].COL_DD_DT;
+					}else{
+						arrayList[i] = "-";	
+					}
+				}
+				if(measure=="008" ){
+
+					html += "<table style='width: 400px; height: 50px; margin-top: 12px;'>" +
+					"<tr>" +
+					"<td>BOD</td>" +
+					"<td>Chl-a</td>" +
+					"<td>TP</td>" +
+					"<td>수온</td>" +
+					"<td>COD</td>" +
+					"<td>pH</td>" +
+					"<td>DO</td>" +
+					"<td>총조류</td>" +
+					"<td>남조류</td>" +
+					"<td>규조류</td>" +
+					"<td>녹조류</td>" +
+					"</tr>" +
+					"<tr>";
 					
-					return false;
+					for(var a = 0; a < 11; a++){
+						html += "<td>"+arrayList[a]+"</td>";
+					}
+
+				}else if(measure=="010"){
+					html += "<table style='width: 400px; height: 50px; margin-top: 12px;'>" +
+					"<tr>" +
+					"<td>수위</td>" +
+					"<td>공용량</td>" +
+					"<td>유입량</td>" +
+					"<td>방유량</td>" +
+					"</tr>" +
+					"<tr>";
+					
+					for(var a = 0; a < 4; a++){
+						html += "<td>"+arrayList[a]+"</td>";
+					}
+				}else if(measure=="007"){
+					html += "<table style='width: 400px; height: 50px; margin-top: 12px;'>" +
+					"<tr>" +
+					"<td>CHL_A</td>" +
+					"<td>TP</td>" +
+					"<td>수온</td>" +
+					"<td>pH</td>" +
+					"<td>DO</td>" +
+					"<td>TN</td>" +
+					"<td>탁도</td>" +
+					"<td>TOC</td>" +
+					"<td>EC</td>" +
+					"</tr>" +
+					"<tr>";
+					
+					for(var a = 0; a < 9; a++){
+						html += "<td>"+arrayList[a]+"</td>";
+					}
+				}
+				else{
+					html += "<table style='width: 400px; height: 50px; margin-top: 12px;'>" +
+							"<tr>" +
+							"<td>BOD</td>" +
+							"<td>Chl-a</td>" +
+							"<td>TP</td>" +
+							"<td>수온</td>" +
+							"<td>COD</td>" +
+							"<td>pH</td>" +
+							"<td>DO</td>" +
+							"<td>TN</td>" +
+							"<td>유량</td>" +
+							"</tr>" +
+							"<tr>";
+					
+					for(var a = 0; a < 9; a++){
+						html += "<td>"+arrayList[a]+"</td>";
+					}
 				}
 				
-			});
-			
-			$("#settingButton").trigger("click");
-			this.isSeached = true;
-		}
+				html+="</tr></table>";
+
+				$("#detailTable").html("");
+				$(html).appendTo("#detailTable");
+			}else{
+				html +="<div>지점정보 없음</div>";
+				$("#detailTable").html("");
+				$(html).appendTo("#detailTable");
+
+			}
+		});
+		
+		
 	}
 	
 	/**
@@ -275,6 +441,7 @@ function TopPanel(){
 	 * @프로그램 설명 : 중권역 이름으로 이동을 하기 위한 기능을 수행하기 위해 feature 데이터를 받아오는 메서드
 	 */
 	function initMiddleSectionName(){
+		
 		var queryNumber = 30;
 		var condition = "all";
 		
@@ -285,7 +452,7 @@ function TopPanel(){
 			var result = data.d[0];
 			var html = "<li><a href=\"#\">중권역</a></li>";
 			for(var a = 0; a < result.length; a++){
-				html += "<li><a href=\"javascript:main.getMapManager().moveToMw(" + result[a]["mw_code"] + ")\">" + result[a]["mw_name"] + "</a></li>"
+				html += "<li><a href=\"javascript:main.getMapManager().moveToMw(" + result[a]["mw_code"] + ")\">" + result[a]["mw_name"] + "</a></li>";
 			}
 
 			$("#selectOptions").html("");
@@ -380,13 +547,14 @@ function TopPanel(){
 				
 				
 				topPanel.stopMove.apply(topPanel, []);
-				
+				//console.info("1:"+main.getTopPanel().autoData);
 				$.ajax({
 					url : "../jsps/queryData/getQueryData.jsp?queryNum=52&spotValue=" + value + "&requestType=2",
 					dataType : "json"
 				}).done(function(data){
-					//alert(data.d[0]);
+					//alert(data.d[0]);					
 					main.getTopPanel().autoData = data.d[0];
+					//console.info("2:"+main.getTopPanel().autoData);
 				});
 			}else{
 				main.getTopPanel().autoData = null;
@@ -425,5 +593,6 @@ function TopPanel(){
 		}
 		
 		return realKey;
-	}
+	}	
+	
 }

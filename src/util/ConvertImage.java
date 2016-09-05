@@ -117,7 +117,7 @@ public class ConvertImage {
 			String time = ((Long) date.getTime()).toString()
 					+ ((Integer) ((int) (Math.random() * 100000))).toString();
 			fileName = time + ".png";
-
+			
 			ostream = new FileOutputStream(path + "/" + time + ".png");
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
@@ -173,7 +173,6 @@ public class ConvertImage {
 
 	private void cleanOldImage() {
 		String path = getPath();
-
 		File file = new File(path);
 		File[] files = file.listFiles();
 		Date date = new Date();
@@ -187,4 +186,5 @@ public class ConvertImage {
 			}
 		}
 	}
+
 }

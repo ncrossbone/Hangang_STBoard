@@ -1,5 +1,6 @@
 package Data;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -91,6 +92,15 @@ public class GeoDataQuery implements IQueryWork {
 			jsonArray = jsonObject.getJSONArray("features");
 			Common common = new Common();
 			String nowChartbarColor;
+			
+			File files[] = new File(getPath()).listFiles();
+			
+			if(files.length!=0){
+				for(int i =0; i<files.length;i++){
+				files[i].delete();
+			}
+			}
+			
 			for(int a = 0; a < jsonArray.length(); a++){
 				tempJsonObject = jsonArray.getJSONObject(a).getJSONObject("properties");
 				nowChartbarColor = common.getMarkerImageAndChartColor(Float.parseFloat(tempJsonObject.get("COL_DD_DT").toString()), measure, true);
@@ -132,5 +142,38 @@ public class GeoDataQuery implements IQueryWork {
 		result = "{\"d\":[" + jsonObject.toString() + "]}";
 //		System.out.println("end");
 		return result;
+	}
+	
+	private String getPath() {
+		String path = ConvertImage.class.getResource("").getPath();
+		//System.out.println("--------1"+path);
+		String replaceString = path.replace("%20", " ");
+		//System.out.println("--------2"+replaceString);
+		File file = new File(replaceString);
+		//System.out.println("--------3"+replaceString);
+		file = file.getParentFile().getParentFile().getParentFile();
+		File[] files = file.listFiles();
+		String name = "";
+		for (int a = 0; a < files.length; a++) {
+			name = files[a].getName();
+			if (name.equals("resources")) {
+				file = files[a];
+				a = files.length + 1;
+				files = null;
+				files = file.listFiles();
+
+				for (int b = 0; b < files.length; b++) {
+					name = files[b].getName();
+					if (name.equals("download")) {
+						file = files[b];
+						break;
+					}
+				}
+			}
+		}
+
+		path = file.getPath();
+
+		return path;
 	}
 }

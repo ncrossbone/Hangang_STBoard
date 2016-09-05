@@ -327,7 +327,7 @@ function TwoDMap() {
 			}, 1000);
 		}
 	};
-
+	
 	this.loadEndCheck = function() {
 		// khLee
 		//console.info(this.loading);
@@ -335,7 +335,7 @@ function TwoDMap() {
 			$("#dialog-modal").dialog("destroy");
 			this.loading = 0;
 			if (main.getTopPanel().isAuto) {
-				main.getTopPanel().playAutoPlay();
+				//main.getTopPanel().playAutoPlay();
 			}
 		} else {
 			this.loading++;
@@ -529,6 +529,8 @@ function TwoDMap() {
 	};
 
 	this.moveToMw = function(code) {
+			main.getTopPanel().jungCode = code;
+			var measure = main.getTopPanel().measure;
 		$
 				.ajax(
 						{
@@ -541,11 +543,51 @@ function TwoDMap() {
 					var json = new OpenLayers.Format.GeoJSON();
 					var jsonFeatures = json.read(result);
 					var bound = jsonFeatures[0].geometry.getBounds();
-
+					
 					if (bound != undefined) {
-						map.zoomToExtent(bound);
+						//map.zoomToExtent(bound);
 					}
 				});
+		
+		this.jungSelect(code,measure);
+		$("#select_02").css("display","block");
+	
+	};
+
+	
+	//16.07.07 hyeok 중권역 선택시 해당 지점 리스트 불러오기
+	this.jungSelect = function(code,measure){
+		if(code!=null&&measure!=undefined){
+		$
+		.ajax(
+				{
+					url : "../jsps/queryData/getQueryData.jsp?queryNum=23&code="+code+"&measure="+measure,
+					dataType : "json"
+				}).done(function(data) {
+					
+					var result = data.d[0];
+					//console.info(result);
+					if(result.features!=null){
+					var json = new OpenLayers.Format.GeoJSON();
+					var jsonFeatures = json.read(result);
+					//console.info(jsonFeatures);
+					var html ="<li><a href=\"#\">지점을 선택하세요.</a></li>";
+					//console.info(main.getTopPanel());
+					//html = "<option>지점을 선택하세요.</option>";
+					for(var a = 0; a < jsonFeatures.length; a++){
+						//html += "<li value='"+jsonFeatures[a].geometry.x+","+jsonFeatures[a].geometry.y+","+jsonFeatures[a].data.MMP_CD+","+measure+"'>"+jsonFeatures[a].data.MMP_NM+"</li>"
+						//console.info(jsonFeatures[a].data.MMP_CD);
+						html += "<li><a href=\"javascript:main.getTopPanel().selectJung("+jsonFeatures[a].geometry.x+","+jsonFeatures[a].geometry.y+",'"+jsonFeatures[a].data.MMP_CD+"','"+measure+"')\">"+jsonFeatures[a].data.MMP_NM+"</a></li>";
+						//html += "<li><a href=\"javascript:main.getMapManager().moveToMw(" + result[a]["mw_code"] + ")\">" + result[a]["mw_name"] + "</a></li>";
+					}	
+					}else{
+						html = "<li>지점이 존재하지 않습니다.</li>";
+					}
+					$("#selectOptions_2").html("");
+					$(html).appendTo("#selectOptions_2");
+					
+		});	
+		}
 	};
 
 	this.setCenterFixed = function() {
@@ -912,3 +954,4 @@ TwoDMap.prototype.saveSearchStatus = function() {
 TwoDMap.prototype.setSearchStatus = function(values) {
 	Map.prototype.setSearchStatus.apply(this, [ values ]);
 };
+

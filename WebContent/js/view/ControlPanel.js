@@ -227,7 +227,10 @@ function ControlPanel(){
 	this.fireSettingButtonClickEvent = function(target){
 		
 		var topPanel = main.getTopPanel();
+		var twoDMap = new TwoDMap();
+		
 		topPanel.stopMove();
+		topPanel.init();
 		$(".b_07 a").show();
 		$(".b_08 a").hide();
 		
@@ -236,50 +239,68 @@ function ControlPanel(){
 		var spotValue;
 		var lon;
 		var lat;
+		var code = main.getTopPanel().jungCode;
+		var measure;
 		var baseString ="javascript: ControlPanel."
 
 			$('ul.place_box').find('input:checked').each(function(index, element){
 				if(element.value != ControlPanel.WATER_QAULITY_MONITORING_NETWORK){
-					//적용버튼 클릭 시 중심점 이동 2016.04.06 hyeok 
+					
+					//적용버튼 클릭 시 중심점 이동 2016.04.06 hyeok
 					switch(element.value){
-					case baseString+"WQMN_GENERAL_SPOT": 
+					case baseString+"WQMN_GENERAL_SPOT":
 						lon=14164696.84856;
 						lat=4515350.941514;
+						measure = "001";
 						break;
 					case baseString+"WQMN_TOTAL_SPOT":
 						lon=14182365.756059;
 						lat=4538645.1468495;
+						measure = "003";
 						break;
 					case baseString+"WQMN_REPRESECTATION_MIDDLE_SECTION":
 						lon=14169651.237678;
 						lat=4512628.669361;
+						measure = "002";
 						break;
 					case baseString+"WQMN_MAIN_SPOT":
 						lon=14169651.237678;
 						lat=4512628.669361;
+						measure = "004";
 						break;
 					case baseString+"WQMN_BO_SPOT":
 						lon=14213993.276218;
 						lat=4476709.6953706;
+						measure = "006";
 						break;
 					case baseString+"WQMN_FORECAST_SPOT":
 						lon=14176442.713284;
 						lat=4526914.959065;
+						measure = "005";
 						break;
 					case baseString+"AUTOMATIC_MEASUREMENT_NETWORK":
 						lon=14180123.866517;
 						lat=4533454.2233111;
+						measure = "007";
 						break;
 					case baseString+"TIDE_MEASUREMENT_NETWORK":
 						lon=14169116.817906;
 						lat=4540262.5936187;
+						measure = "008";
 						break;
 					case baseString+"DAM_BO":
 						lon=14167876.49611;
 						lat=4513297.8423883;
+						measure = "010";
 						break;
 
 					}
+					$("#detailTable").html("");
+					$("#Link p a").html("중권역");
+					$("#Link_2 p a").html("지점을 선택하세요.");
+					main.getTopPanel().measure = measure;
+					
+					twoDMap.jungSelect(code,measure,element.value);
 					map.setCenter(new OpenLayers.LonLat(lon, lat),
 							15);
 
